@@ -54,3 +54,33 @@ while changed:
         break
 
 
+if not charShrink:
+    sys.exit(0)
+        
+code = "".join(code)
+        
+changed = True
+while changed:
+    changed = False
+    for pos in range(len(code)):
+        for stride in range(1,3):
+            with open("code.fe", 'w') as f:
+                i = 0
+                omitted = range(pos,pos+stride)
+                for line in code:
+                    if i not in omitted:
+                        f.write(line)
+                    i += 1
+            new_bug = bug()
+            if new_bug == initial_bug:
+                print("REMOVING CHAR", pos, "STRIDE", stride, "WORKED:")
+                print("NEW LENGTH:", len(code)-1)
+                changed = True
+                newcode = code[:pos] + code[pos+stride:]
+                code = newcode
+                with open("finish.fe", 'w') as f:
+                    for line in code:
+                        f.write(line)
+                break
+        if changed:
+            break
