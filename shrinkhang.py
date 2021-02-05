@@ -71,7 +71,7 @@ while changed:
                     if i not in omitted:
                         f.write(line)
                     i += 1
-            new_bug = bug()
+            new_bug = bug(timeout)
             if new_bug == initial_bug:
                 print("REMOVING CHAR", pos, "STRIDE", stride, "WORKED:")
                 print("NEW LENGTH:", len(code)-1)
