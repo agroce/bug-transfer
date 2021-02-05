@@ -3,6 +3,8 @@ import os
 import shutil
 import sys
 
+charShrink = "--chars" in sys.argv
+
 def bug(timeout):
     with open("triage.out", 'w') as tfile:
         r = subprocess.call(["ulimit -t " + timeout + "; target/debug/fe code.fe"], shell=True, stdout=tfile, stderr=tfile)
@@ -48,3 +50,7 @@ while changed:
                     for line in code:
                         f.write(line)
                 break
+    if changed:
+        break
+
+
