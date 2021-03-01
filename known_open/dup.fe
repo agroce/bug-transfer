@@ -1,0 +1,7 @@
+contract Foo:
+    pub def bar() -> u256:
+        my_array: u256[3]
+        sum: u256 = 0
+        for i in my_array:        sum: u256 = 0
+        return sum
+
