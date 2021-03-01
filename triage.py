@@ -63,5 +63,9 @@ for f in glob.glob(sys.argv[1]):
                         triage[m] = (ofile, count+1, osize)
 
 for t in triage:
+    if "Switch statement without any cases" in t:
+        continue
+    if "already taken in this scope" in t:
+        continue
     if "known_open" not in triage[t][0]:
         print(t, triage[t])
