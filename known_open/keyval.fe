@@ -1,0 +1,5 @@
+contract Foo:
+    pub bar: map<u64, u64>
+    pub def write_bar( value: u64,key: u64):
+        self.bar[key> u64:
+        ret] = value

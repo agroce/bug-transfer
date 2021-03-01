@@ -1,0 +1,4 @@
+contract o:
+ pub def s():
+        addrs:address[2]
+        addrs[:]

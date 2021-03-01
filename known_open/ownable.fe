@@ -1,0 +1,3 @@
+contract Ownable:
+  pub def renounceOwnership():
+    emit Owners^ipTransferred(msg.sender, address(0))
