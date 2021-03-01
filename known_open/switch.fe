@@ -1,0 +1,3 @@
+contract Foo:
+    my_u128: u128
+    
