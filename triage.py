@@ -105,8 +105,9 @@ for t in triage:
     if "Bad escape sequence" in t: # Needs special casing to ignore
         continue
 
-    if "known_open" not in triage[t][0]:
-        if "known_closed" in triage[t][0]:
-            print("KNOWN CLOSED:", t, triage[t][:-2])
-        else:
-            print(t, triage[t][:-2])
+    if "known_closed" in triage[t][0]:
+        print("KNOWN CLOSED:", t, triage[t][:-2])
+    elif "known_open" in triage[t][0]:
+        print("KNOWN OPEN:", t, triage[t][:-2])
+    else:
+        print(t, triage[t][:-2])
