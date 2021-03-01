@@ -96,7 +96,7 @@ for f in glob.glob(sys.argv[1]):
                     triage[m] = (f, 1, size)
                 else:
                     (ofile, count, osize) = triage[m]
-                    if (size < osize):
+                    if (size < osize) and ("known" not in ofile):
                         triage[m] = (f, count+1, size)
                     else:
                         triage[m] = (ofile, count+1, osize)
