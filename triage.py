@@ -26,6 +26,8 @@ for f in glob.glob("bug-transfer/known_closed/*.fe"):
                     if "message" in mc:
                         m = "Yul compilation failed:" + mc.split('"message":')[1].split('"severity":')[0]
                         break
+                if "Variable name " in m and " already taken in this scope" in m:
+                    m = 'Yul compilation failed:"Variable name $FOO already taken in this scope.'
                 if m not in triage:
                     triage[m] = (f, 1, size)
                 else:
@@ -82,6 +84,8 @@ for f in glob.glob(sys.argv[1]):
                     if "message" in mc:
                         m = "Yul compilation failed:" + mc.split('"message":')[1].split('"severity":')[0]
                         break
+                if "Variable name " in m and " already taken in this scope" in m:
+                    m = 'Yul compilation failed:"Variable name $FOO already taken in this scope.'
                 if m not in triage:
                     triage[m] = (f, 1, size)
                 else:
