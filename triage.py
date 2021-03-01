@@ -16,6 +16,8 @@ for f in glob.glob("bug-transfer/known_closed/*.fe"):
     with open("triage.out", 'r') as tfile:
         for line in tfile:
             if "thread" in line:
+                if "not yet implemented" in line:
+                    break
                 if "not implemented" in line:
                     break
                 ms = line.split("'")
@@ -47,6 +49,8 @@ for f in glob.glob("bug-transfer/known_open/*.fe"):
             if "thread" in line:
                 if "not implemented" in line:
                     break
+                if "not yet implemented" in line:
+                    break                
                 ms = line.split("'")
                 for mc in ms:
                     if ".rs" in mc and "message" not in line:
@@ -76,6 +80,8 @@ for f in glob.glob(sys.argv[1]):
             if "thread" in line:
                 if "not implemented" in line:
                     break
+                if "not yet implemented" in line:
+                    break                
                 ms = line.split("'")
                 for mc in ms:
                     if ".rs" in mc and "message" not in line:
