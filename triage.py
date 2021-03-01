@@ -106,8 +106,8 @@ for t in triage:
         continue
 
     if "known_closed" in triage[t][0]:
-        print("KNOWN CLOSED:", t, triage[t][:-2])
+        print("KNOWN CLOSED:", t, triage[t][:-2][-1])
     elif "known_open" in triage[t][0]:
-        print("KNOWN OPEN:", t, triage[t][:-2])
+        print("KNOWN OPEN:", t, triage[t][:-2][-1)
     else:
         print(t, triage[t][:-2])
