@@ -108,4 +108,5 @@ for t in triage:
     if "known_open" not in triage[t][0]:
         if "known_closed" in triage[t][0]:
             print("KNOWN CLOSED:", t, triage[t])
-        print(t, triage[t])
+        else:
+            print(t, triage[t])
