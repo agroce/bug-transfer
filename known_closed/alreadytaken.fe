@@ -1,0 +1,5 @@
+contract Foo:
+    pub def bar() -> u256:
+        sum: u256 = 0
+        sum: u256 = 0
+        return sum
