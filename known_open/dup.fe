@@ -4,4 +4,3 @@ contract Foo:
         sum: u256 = 0
         for i in my_array:        sum: u256 = 0
         return sum
-
