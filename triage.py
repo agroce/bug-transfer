@@ -30,6 +30,8 @@ for f in glob.glob("bug-transfer/known_closed/*.fe"):
                         break
                 if "Variable name " in m and " already taken in this scope" in m:
                     m = 'Yul compilation failed:"Variable name $FOO already taken in this scope.'
+                if "Function name " in m and " already taken in this scope" in m:
+                    m = 'Yul compilation failed:"Function name $FOO already taken in this scope.'
                 if m not in triage:
                     triage[m] = (f, 1, size)
                 else:
@@ -61,6 +63,8 @@ for f in glob.glob("bug-transfer/known_open/*.fe"):
                         break
                 if "Variable name " in m and " already taken in this scope" in m:
                     m = 'Yul compilation failed:"Variable name $FOO already taken in this scope.'
+                if "Function name " in m and " already taken in this scope" in m:
+                    m = 'Yul compilation failed:"Function name $FOO already taken in this scope.'
                 if m not in triage:
                     triage[m] = (f, 1, size)
                 else:
@@ -92,6 +96,8 @@ for f in glob.glob(sys.argv[1]):
                         break
                 if "Variable name " in m and " already taken in this scope" in m:
                     m = 'Yul compilation failed:"Variable name $FOO already taken in this scope.'
+                if "Function name " in m and " already taken in this scope" in m:
+                    m = 'Yul compilation failed:"Function name $FOO already taken in this scope.'
                 if m not in triage:
                     triage[m] = (f, 1, size)
                 else:
@@ -108,6 +114,7 @@ for t in triage:
     if "known_closed" in triage[t][0]:
         print("KNOWN CLOSED:", triage[t][:-2])
     elif "known_open" in triage[t][0]:
-        print("KNOWN OPEN:", triage[t][:-2])
+        if triage[m][1] > 1:
+            print("KNOWN OPEN:", triage[t][:-2])
     else:
         print(t, triage[t][:-2])
