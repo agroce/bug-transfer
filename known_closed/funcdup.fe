@@ -1,0 +1,5 @@
+contract Foo:
+    pub def get_u32_min() -> u32:
+        return u32(4294967295)
+    pub def get_u32_min() -> u32:
+        return u32(0)
