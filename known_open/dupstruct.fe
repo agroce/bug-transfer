@@ -1,0 +1,5 @@
+struct House:
+    price: u256
+    price: u256
+contract Foo:
+    my_house: House
