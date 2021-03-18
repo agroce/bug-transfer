@@ -4,75 +4,79 @@ import sys
 import glob
 import shutil
 
+noPrune = "--noPrune" in sys.argv
+
 dnull = open(os.devnull, 'w')
 
 triage = {}
 
-for f in glob.glob("bug-transfer/known_closed/*.fe"):
-    size = os.stat(f).st_size
-    shutil.copy(f, "code.fe")
-    with open("triage.out", 'w') as tfile:
-        r = subprocess.call(["target/debug/fe code.fe --overwrite"], shell=True, stdout=tfile, stderr=tfile)
-    with open("triage.out", 'r') as tfile:
-        for line in tfile:
-            if "thread" in line:
-                if "not yet implemented" in line:
-                    break
-                if "not implemented" in line:
-                    break
-                ms = line.split("'")
-                for mc in ms:
-                    if ".rs" in mc and "message" not in line:
-                        m = mc
-                        break
-                    if "message" in mc:
-                        m = "Yul compilation failed:" + mc.split('"message":')[1].split('"severity":')[0]
-                        break
-                if "Variable name " in m and " already taken in this scope" in m:
-                    m = 'Yul compilation failed:"Variable name $FOO already taken in this scope.'
-                if "Function name " in m and " already taken in this scope" in m:
-                    m = 'Yul compilation failed:"Function name $FOO already taken in this scope.'
-                if m not in triage:
-                    triage[m] = (f, 1, size)
-                else:
-                    (ofile, count, osize) = triage[m]
-                    if (size < osize):
-                        triage[m] = (f, count+1, size)
-                    else:
-                        triage[m] = (ofile, count+1, osize)
+if not noPrune:
 
-for f in glob.glob("bug-transfer/known_open/*.fe"):
-    size = os.stat(f).st_size
-    shutil.copy(f, "code.fe")
-    with open("triage.out", 'w') as tfile:
-        r = subprocess.call(["target/debug/fe code.fe --overwrite"], shell=True, stdout=tfile, stderr=tfile)
-    with open("triage.out", 'r') as tfile:
-        for line in tfile:
-            if "thread" in line:
-                if "not implemented" in line:
-                    break
-                if "not yet implemented" in line:
-                    break                
-                ms = line.split("'")
-                for mc in ms:
-                    if ".rs" in mc and "message" not in line:
-                        m = mc
+    for f in glob.glob("bug-transfer/known_closed/*.fe"):
+        size = os.stat(f).st_size
+        shutil.copy(f, "code.fe")
+        with open("triage.out", 'w') as tfile:
+            r = subprocess.call(["target/debug/fe code.fe --overwrite"], shell=True, stdout=tfile, stderr=tfile)
+        with open("triage.out", 'r') as tfile:
+            for line in tfile:
+                if "thread" in line:
+                    if "not yet implemented" in line:
                         break
-                    if "message" in mc:
-                        m = "Yul compilation failed:" + mc.split('"message":')[1].split('"severity":')[0]
+                    if "not implemented" in line:
                         break
-                if "Variable name " in m and " already taken in this scope" in m:
-                    m = 'Yul compilation failed:"Variable name $FOO already taken in this scope.'
-                if "Function name " in m and " already taken in this scope" in m:
-                    m = 'Yul compilation failed:"Function name $FOO already taken in this scope.'
-                if m not in triage:
-                    triage[m] = (f, 1, size)
-                else:
-                    (ofile, count, osize) = triage[m]
-                    if (size < osize):
-                        triage[m] = (f, count+1, size)
+                    ms = line.split("'")
+                    for mc in ms:
+                        if ".rs" in mc and "message" not in line:
+                            m = mc
+                            break
+                        if "message" in mc:
+                            m = "Yul compilation failed:" + mc.split('"message":')[1].split('"severity":')[0]
+                            break
+                    if "Variable name " in m and " already taken in this scope" in m:
+                        m = 'Yul compilation failed:"Variable name $FOO already taken in this scope.'
+                    if "Function name " in m and " already taken in this scope" in m:
+                        m = 'Yul compilation failed:"Function name $FOO already taken in this scope.'
+                    if m not in triage:
+                        triage[m] = (f, 1, size)
                     else:
-                        triage[m] = (ofile, count+1, osize)
+                        (ofile, count, osize) = triage[m]
+                        if (size < osize):
+                            triage[m] = (f, count+1, size)
+                        else:
+                            triage[m] = (ofile, count+1, osize)
+
+    for f in glob.glob("bug-transfer/known_open/*.fe"):
+        size = os.stat(f).st_size
+        shutil.copy(f, "code.fe")
+        with open("triage.out", 'w') as tfile:
+            r = subprocess.call(["target/debug/fe code.fe --overwrite"], shell=True, stdout=tfile, stderr=tfile)
+        with open("triage.out", 'r') as tfile:
+            for line in tfile:
+                if "thread" in line:
+                    if "not implemented" in line:
+                        break
+                    if "not yet implemented" in line:
+                        break                
+                    ms = line.split("'")
+                    for mc in ms:
+                        if ".rs" in mc and "message" not in line:
+                            m = mc
+                            break
+                        if "message" in mc:
+                            m = "Yul compilation failed:" + mc.split('"message":')[1].split('"severity":')[0]
+                            break
+                    if "Variable name " in m and " already taken in this scope" in m:
+                        m = 'Yul compilation failed:"Variable name $FOO already taken in this scope.'
+                    if "Function name " in m and " already taken in this scope" in m:
+                        m = 'Yul compilation failed:"Function name $FOO already taken in this scope.'
+                    if m not in triage:
+                        triage[m] = (f, 1, size)
+                    else:
+                        (ofile, count, osize) = triage[m]
+                        if (size < osize):
+                            triage[m] = (f, count+1, size)
+                        else:
+                            triage[m] = (ofile, count+1, osize)
 
 for f in glob.glob(sys.argv[1]):
     size = os.stat(f).st_size
@@ -114,7 +118,7 @@ for t in triage:
     if "known_closed" in triage[t][0]:
         print("KNOWN CLOSED:", triage[t][:-2])
     elif "known_open" in triage[t][0]:
-        if triage[m][1] > 1:
+        if triage[t][1] > 1:
             print("KNOWN OPEN:", triage[t][:-2])
     else:
         print(t, triage[t][:-2])
