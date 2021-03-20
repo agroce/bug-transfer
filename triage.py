@@ -86,10 +86,11 @@ for f in glob.glob(sys.argv[1]):
     with open("triage.out", 'r') as tfile:
         for line in tfile:
             if "thread" in line:
-                if "not implemented" in line:
-                    break
-                if "not yet implemented" in line:
-                    break                
+                if not noPrune:
+                    if "not implemented" in line:
+                        break
+                    if "not yet implemented" in line:
+                        break
                 ms = line.split("'")
                 for mc in ms:
                     if ".rs" in mc and "message" not in line:
