@@ -92,6 +92,7 @@ for f in glob.glob(sys.argv[1]):
                     if "not yet implemented" in line:
                         break
                 ms = line.split("'")
+                m = line
                 for mc in ms:
                     if ".rs" in mc and "message" not in line:
                         m = mc
