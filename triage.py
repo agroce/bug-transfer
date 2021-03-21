@@ -25,6 +25,7 @@ if not noPrune:
                     if "not implemented" in line:
                         break
                     ms = line.split("'")
+                    m = line
                     for mc in ms:
                         if ".rs" in mc and "message" not in line:
                             m = mc
@@ -58,6 +59,7 @@ if not noPrune:
                     if "not yet implemented" in line:
                         break                
                     ms = line.split("'")
+                    m = line
                     for mc in ms:
                         if ".rs" in mc and "message" not in line:
                             m = mc
