@@ -20,6 +20,9 @@ def bug():
                     if "message" in mc:
                         m = "Yul compilation failed:" + mc.split('"message":')[1].split('"severity":')[0]
                         break
+                    if "stack" in mc:
+                        m = mc
+                        break
     return m
 
 dnull = open(os.devnull, 'w')
