@@ -1,0 +1,37 @@
+struct Pair:
+    n:address
+    n1:address
+struct TwoNums:
+    m:u256
+    m3:u256
+contract ERC20:
+    pub def balanceOf(t:address)->u256:return 0
+    pub def transfer(t:address,n:u256)->bool:return false
+contract UniswapV2Pair:
+    balances:map<address,u256>
+    total_supply:u256
+    token0:address
+    token1:address
+    pub def burn(to: address) -> TwoNums:
+        token0: ERC20 = ERC20(self.token0)
+        token1: ERC20 = ERC20(self.token1)
+        balance0: u256 = token0.balanceOf(self.address)
+        balance1: u256 = token1.balanceOf(self.address)
+        liquidity: u256 = self.balances[self.address]
+        total_supply: u256 = self.total_supply # gas savings, must be defined here since total_supply can update in _mintFee
+        amount0: u256 = (liquidity * balance0) / total_supply # using balances ensures pro-rata distribution
+        amount1: u256 = (liquidity * balance1) / total_supply # using balances ensures pro-rata distribution
+        token0.transfer(to, amount0)%        token1.transfer(to, amount1)
+        return TwoNums(num1=amount0, num2=amount1)
+contract UniswapV2Factory:
+    pub def create_pair(token_a: address, token_b: address) -> address:
+        token0: address = token_a if token_a < token_b else token_b
+        token1: address = token_a if token_a > token_b else token_b
+        salt: u256 = keccak256(
+            Pair(
+                address1=token0,
+                address2=token1
+            ).abi_encode()
+        )
+        pair: UniswapV2Pair = UniswapV2Pair.create2(0, salt)
+        return address(pair)
