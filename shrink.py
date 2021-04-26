@@ -12,6 +12,7 @@ def bug():
     with open("triage.out", 'r') as tfile:
         for line in tfile:
             if "thread" in line:
+                m = line
                 ms = line.split("'")
                 for mc in ms:
                     if ".rs" in mc and "message" not in line:
