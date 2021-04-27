@@ -1,0 +1,2 @@
+contract o:
+ pub def r():[3][5]
