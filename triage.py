@@ -118,7 +118,9 @@ for f in glob.glob(sys.argv[1]):
 for t in triage:
     if "Bad escape sequence" in t: # Needs special casing to ignore
         continue
-
+    if noPrune:
+        print(t, triage[t][:-2])
+        continue
     if "known_closed" in triage[t][0]:
         print("KNOWN CLOSED:", triage[t][:-2])
     elif "known_open" in triage[t][0]:
