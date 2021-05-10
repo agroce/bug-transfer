@@ -14,9 +14,9 @@ if not noPrune:
 
     for f in glob.glob("bug-transfer/known_closed/*.fe"):
         size = os.stat(f).st_size
-        shutil.copy(f, "code.fe")
+        shutil.copy(f, "triagecode.fe")
         with open("triage.out", 'w') as tfile:
-            r = subprocess.call(["target/debug/fe code.fe --overwrite --optimize"], shell=True, stdout=tfile, stderr=tfile)
+            r = subprocess.call(["target/debug/fe triagecode.fe --overwrite --optimize"], shell=True, stdout=tfile, stderr=tfile)
         with open("triage.out", 'r') as tfile:
             for line in tfile:
                 if "thread" in line:
@@ -48,9 +48,9 @@ if not noPrune:
 
     for f in glob.glob("bug-transfer/known_open/*.fe"):
         size = os.stat(f).st_size
-        shutil.copy(f, "code.fe")
+        shutil.copy(f, "triagecode.fe")
         with open("triage.out", 'w') as tfile:
-            r = subprocess.call(["target/debug/fe code.fe --overwrite --optimize"], shell=True, stdout=tfile, stderr=tfile)
+            r = subprocess.call(["target/debug/fe triagecode.fe --overwrite --optimize"], shell=True, stdout=tfile, stderr=tfile)
         with open("triage.out", 'r') as tfile:
             for line in tfile:
                 if "thread" in line:
@@ -82,9 +82,9 @@ if not noPrune:
 
 for f in glob.glob(sys.argv[1]):
     size = os.stat(f).st_size
-    shutil.copy(f, "code.fe")
+    shutil.copy(f, "triagecode.fe")
     with open("triage.out", 'w') as tfile:
-        r = subprocess.call(["target/debug/fe code.fe --overwrite --optimize"], shell=True, stdout=tfile, stderr=tfile)
+        r = subprocess.call(["target/debug/fe triagecode.fe --overwrite --optimize"], shell=True, stdout=tfile, stderr=tfile)
     with open("triage.out", 'r') as tfile:
         for line in tfile:
             if "thread" in line:
