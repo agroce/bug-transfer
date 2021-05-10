@@ -1,0 +1,5 @@
+contract o
+    my_sto_tuple:(u256,i32)
+    pub def e->(u256,bool,address)
+        m:u256=self.my_sto_tuple.m
+        return
