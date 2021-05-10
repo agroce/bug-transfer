@@ -1,0 +1,6 @@
+contract C:
+ pub def r(t:address,n:u256)->bool:
+  return false
+contract r:
+ pub def g()->string100:
+  return string100("")
