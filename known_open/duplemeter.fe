@@ -1,0 +1,4 @@
+contract Foo:
+        my_other_tuple: (address, address)
+struct tuple_address_address:
+        value: u256
