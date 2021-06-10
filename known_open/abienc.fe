@@ -1,0 +1,3 @@
+contract o
+ event t
+  _:()

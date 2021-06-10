@@ -1,0 +1,3 @@
+contract o
+ pub def r(z:u256)
+  ''.t
