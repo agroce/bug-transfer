@@ -59,10 +59,11 @@ if not noPrune:
         with open("triage.out", 'r') as tfile:
             for line in tfile:
                 if "thread" in line:
-                    if "not implemented" in line:
-                        break
-                    if "not yet implemented" in line:
-                        break                
+                    if ignoreImp:
+                        if "not implemented" in line:
+                            break
+                        if "not yet implemented" in line:
+                            break                
                     ms = line.split("'")
                     m = line
                     for mc in ms:
@@ -70,7 +71,10 @@ if not noPrune:
                             m = mc
                             break
                         if "message" in mc:
-                            m = "Yul compilation failed:" + mc.split('"message":')[1].split('"severity":')[0]
+                            try:
+                                m = "Yul compilation failed:" + mc.split('"message":')[1].split('"severity":')[0]
+                            except:
+                                m = mc
                             break
                     if "Variable name " in m and " already taken in this scope" in m:
                         m = 'Yul compilation failed:"Variable name $FOO already taken in this scope.'
