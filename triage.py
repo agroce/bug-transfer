@@ -4,6 +4,13 @@ import sys
 import glob
 import shutil
 
+def getMessage(mc):
+    if "Yul" in mc:
+        m = "Yul compilation failed:" + mc.split('"message":')[1].split('"severity":')[0]
+    else if "analyze" in mc:
+        m = "failed to analyze lowered AST:" + mc.split("message:")[1].split("labels:")[0]
+    return m
+
 ignoreImp = "--ignoreImp" in sys.argv
 noPrune = "--noPrune" in sys.argv
 
@@ -33,11 +40,7 @@ if not noPrune:
                             m = mc
                             break
                         if "message" in mc:
-                            try:
-                                m = "Yul compilation failed:" + mc.split('"message":')[1].split('"severity":')[0]
-                            except:
-                                m = mc
-                            break
+                            m = getMessage(mc)
                     if "Variable name " in m and " already taken in this scope" in m:
                         m = 'Yul compilation failed:"Variable name $FOO already taken in this scope.'
                     if "Function name " in m and " already taken in this scope" in m:
@@ -71,11 +74,7 @@ if not noPrune:
                             m = mc
                             break
                         if "message" in mc:
-                            try:
-                                m = "Yul compilation failed:" + mc.split('"message":')[1].split('"severity":')[0]
-                            except:
-                                m = mc
-                            break
+                            m = getMessage(mc)
                     if "Variable name " in m and " already taken in this scope" in m:
                         m = 'Yul compilation failed:"Variable name $FOO already taken in this scope.'
                     if "Function name " in m and " already taken in this scope" in m:
@@ -109,11 +108,7 @@ for f in glob.glob(sys.argv[1]):
                         m = mc
                         break
                     if "message" in mc:
-                        try:
-                            m = "Yul compilation failed:" + mc.split('"message":')[1].split('"severity":')[0]
-                        except:
-                            m = mc
-                        break
+                        m = getMessage(mc)
                 if "Variable name " in m and " already taken in this scope" in m:
                     m = 'Yul compilation failed:"Variable name $FOO already taken in this scope.'
                 if "Function name " in m and " already taken in this scope" in m:
