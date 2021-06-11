@@ -7,7 +7,7 @@ import shutil
 def getMessage(mc):
     if "Yul" in mc:
         m = "Yul compilation failed:" + mc.split('"message":')[1].split('"severity":')[0]
-    else if "analyze" in mc:
+    elif "analyze" in mc:
         m = "failed to analyze lowered AST:" + mc.split("message:")[1].split("labels:")[0]
     return m
 
