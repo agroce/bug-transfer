@@ -1,0 +1,3 @@
+contract Foo
+ pub def s:
+  o:Foo=Foo.create2(1)
