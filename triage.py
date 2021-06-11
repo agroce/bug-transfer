@@ -109,7 +109,10 @@ for f in glob.glob(sys.argv[1]):
                         m = mc
                         break
                     if "message" in mc:
-                        m = "Yul compilation failed:" + mc.split('"message":')[1].split('"severity":')[0]
+                        try:
+                            m = "Yul compilation failed:" + mc.split('"message":')[1].split('"severity":')[0]
+                        except:
+                            m = mc
                         break
                 if "Variable name " in m and " already taken in this scope" in m:
                     m = 'Yul compilation failed:"Variable name $FOO already taken in this scope.'
