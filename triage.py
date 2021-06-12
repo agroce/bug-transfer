@@ -41,6 +41,8 @@ if not noPrune:
                             break
                         if "message" in mc:
                             m = getMessage(mc)
+                        if "ParserError: Expected 'StringLiteral' but got 'ILLEGAL'" in mc:
+                            m = "ILLEGAL"
                     if "Variable name " in m and " already taken in this scope" in m:
                         m = 'Yul compilation failed:"Variable name $FOO already taken in this scope.'
                     if "Function name " in m and " already taken in this scope" in m:
@@ -75,6 +77,8 @@ if not noPrune:
                             break
                         if "message" in mc:
                             m = getMessage(mc)
+                        if "ParserError: Expected 'StringLiteral' but got 'ILLEGAL'" in mc:
+                            m = "ILLEGAL"                            
                     if "Variable name " in m and " already taken in this scope" in m:
                         m = 'Yul compilation failed:"Variable name $FOO already taken in this scope.'
                     if "Function name " in m and " already taken in this scope" in m:
@@ -109,6 +113,8 @@ for f in glob.glob(sys.argv[1]):
                         break
                     if "message" in mc:
                         m = getMessage(mc)
+                    if "ParserError: Expected 'StringLiteral' but got 'ILLEGAL'" in mc:
+                        m = "ILLEGAL"                        
                 if "Variable name " in m and " already taken in this scope" in m:
                     m = 'Yul compilation failed:"Variable name $FOO already taken in this scope.'
                 if "Function name " in m and " already taken in this scope" in m:
