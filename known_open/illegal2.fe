@@ -1,0 +1,6 @@
+contract Foo:
+   def transfer(recipient: address) -> bool:
+        return false
+contract UniswapV2Pair:
+    pub def set_feeSto_setter(fee_to_setter: address):
+        assert msg.sender < fee_to_setter, "UniwapV2: FORBIDDEN"
