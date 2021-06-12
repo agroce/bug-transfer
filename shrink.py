@@ -5,6 +5,13 @@ import sys
 
 charShrink = "--chars" in sys.argv
 
+def getMessage(mc):
+    if "Yul" in mc:
+        m = "Yul compilation failed:" + mc.split('"message":')[1].split('"severity":')[0]
+    elif "analyze" in mc:
+        m = "failed to analyze lowered AST:" + mc.split("message:")[1].split("labels:")[0]
+    return m
+
 def bug():
     with open("triage.out", 'w') as tfile:
         r = subprocess.call(["target/debug/fe code.fe"], shell=True, stdout=tfile, stderr=tfile)
@@ -19,7 +26,7 @@ def bug():
                         m = mc
                         break
                     if "message" in mc:
-                        m = "Yul compilation failed:" + mc.split('"message":')[1].split('"severity":')[0]
+                        m = getMessage(mc)
                         break
                     if "stack" in mc:
                         m = mc
