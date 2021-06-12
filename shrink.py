@@ -14,7 +14,7 @@ def getMessage(mc):
 
 def bug():
     with open("triage.out", 'w') as tfile:
-        r = subprocess.call(["target/debug/fe code.fe"], shell=True, stdout=tfile, stderr=tfile)
+        r = subprocess.call(["ulimit -t 5; target/debug/fe code.fe"], shell=True, stdout=tfile, stderr=tfile)
     m = None
     with open("triage.out", 'r') as tfile:
         for line in tfile:
