@@ -24,7 +24,7 @@ if not noPrune:
         size = os.stat(f).st_size
         shutil.copy(f, "triagecode.fe")
         with open("triage.out", 'w') as tfile:
-            r = subprocess.call(["target/debug/fe triagecode.fe --overwrite --optimize"], shell=True, stdout=tfile, stderr=tfile)
+            r = subprocess.call(["ulimit -t 5; target/debug/fe triagecode.fe --overwrite --optimize"], shell=True, stdout=tfile, stderr=tfile)
         with open("triage.out", 'r') as tfile:
             for line in tfile:
                 if "thread" in line:
@@ -41,6 +41,9 @@ if not noPrune:
                             break
                         if "message" in mc:
                             m = getMessage(mc)
+                        if "ParserError: Expected 'StringLiteral' but got 'ILLEGAL'" in mc:
+                            m = "ILLEGAL"
+                            break
                     if "Variable name " in m and " already taken in this scope" in m:
                         m = 'Yul compilation failed:"Variable name $FOO already taken in this scope.'
                     if "Function name " in m and " already taken in this scope" in m:
@@ -58,7 +61,7 @@ if not noPrune:
         size = os.stat(f).st_size
         shutil.copy(f, "triagecode.fe")
         with open("triage.out", 'w') as tfile:
-            r = subprocess.call(["target/debug/fe triagecode.fe --overwrite --optimize"], shell=True, stdout=tfile, stderr=tfile)
+            r = subprocess.call(["ulimit -t 5; target/debug/fe triagecode.fe --overwrite --optimize"], shell=True, stdout=tfile, stderr=tfile)
         with open("triage.out", 'r') as tfile:
             for line in tfile:
                 if "thread" in line:
@@ -75,6 +78,9 @@ if not noPrune:
                             break
                         if "message" in mc:
                             m = getMessage(mc)
+                        if "ParserError: Expected 'StringLiteral' but got 'ILLEGAL'" in mc:
+                            m = "ILLEGAL"
+                            break
                     if "Variable name " in m and " already taken in this scope" in m:
                         m = 'Yul compilation failed:"Variable name $FOO already taken in this scope.'
                     if "Function name " in m and " already taken in this scope" in m:
@@ -92,7 +98,7 @@ for f in glob.glob(sys.argv[1]):
     size = os.stat(f).st_size
     shutil.copy(f, "triagecode.fe")
     with open("triage.out", 'w') as tfile:
-        r = subprocess.call(["target/debug/fe triagecode.fe --overwrite --optimize"], shell=True, stdout=tfile, stderr=tfile)
+        r = subprocess.call(["ulimit -t 5; target/debug/fe triagecode.fe --overwrite --optimize"], shell=True, stdout=tfile, stderr=tfile)
     with open("triage.out", 'r') as tfile:
         for line in tfile:
             if "thread" in line:
@@ -109,6 +115,9 @@ for f in glob.glob(sys.argv[1]):
                         break
                     if "message" in mc:
                         m = getMessage(mc)
+                    if "ParserError: Expected 'StringLiteral' but got 'ILLEGAL'" in mc:
+                        m = "ILLEGAL"
+                        break
                 if "Variable name " in m and " already taken in this scope" in m:
                     m = 'Yul compilation failed:"Variable name $FOO already taken in this scope.'
                 if "Function name " in m and " already taken in this scope" in m:

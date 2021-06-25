@@ -1,0 +1,3 @@
+contract o:
+ pub def g(baz:u256):
+  assert baz>5,""
