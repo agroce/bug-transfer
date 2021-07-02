@@ -9,6 +9,8 @@ def getMessage(mc):
         m = "Yul compilation failed:" + mc.split('"message":')[1].split('"severity":')[0]
     elif "analyze" in mc:
         m = "failed to analyze lowered AST:" + mc.split("message:")[1].split("labels:")[0]
+        if ("No field" in m) and ("tuple_u256_bool_address" in m) and ("item000" in m):
+            m = '''failed to analyze lowered AST: "No field `item00...00000` exists on struct `tuple_u256_bool_address`'''
     return m
 
 ignoreImp = "--ignoreImp" in sys.argv
