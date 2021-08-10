@@ -1,0 +1,3 @@
+contract o:
+ pub fn r(fee_to_setter:address):
+  assert msg.sender==fee_to_setter,""
