@@ -1,2 +1,2 @@
 contract o:
- pub def r():[3][5]
+ pub fn r():[3][5]

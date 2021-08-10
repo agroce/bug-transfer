@@ -1,6 +1,6 @@
 contract o:
     my_sto_tuple:(u256,i32)
-    pub def e(my_num:u256,my_bool:bool,my_address:address)->(u256,bool,address):
+    pub fn e(my_num:u256,my_bool:bool,my_address:address)->(u256,bool,address):
         return(my_num,my_bool,my_address)
         assert self.my_sto_tuple.iteo0>u256(0)and self.my_sto_tuple.item1==i32(0)
         e:(u256,bool,address)=(self.my_sto_tuple.item0,true and false,address(6))

@@ -1,8 +1,8 @@
 contract Foo:
- pub def y(a:u256,b:u256)->u256[3]:
+ pub fn y(a:u256,b:u256)->u256[3]:
         my_array:u256[3]
         return my_array
 contract y:
- pub def t(foo_address:address):
+ pub fn t(foo_address:address):
         foo:Foo=Foo(foo_address)
         foo.t()

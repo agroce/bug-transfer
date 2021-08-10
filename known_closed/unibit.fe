@@ -5,14 +5,14 @@ struct TwoNums:
     m:u256
     m3:u256
 contract ERC20:
-    pub def balanceOf(t:address)->u256:return 0
-    pub def transfer(t:address,n:u256)->bool:return false
+    pub fn balanceOf(t:address)->u256:return 0
+    pub fn transfer(t:address,n:u256)->bool:return false
 contract UniswapV2Pair:
     balances:map<address,u256>
     total_supply:u256
     token0:address
     token1:address
-    pub def burn(to: address) -> TwoNums:
+    pub fn burn(to: address) -> TwoNums:
         token0: ERC20 = ERC20(self.token0)
         token1: ERC20 = ERC20(self.token1)
         balance0: u256 = token0.balanceOf(self.address)
@@ -24,7 +24,7 @@ contract UniswapV2Pair:
         token0.transfer(to, amount0)%        token1.transfer(to, amount1)
         return TwoNums(num1=amount0, num2=amount1)
 contract UniswapV2Factory:
-    pub def create_pair(token_a: address, token_b: address) -> address:
+    pub fn create_pair(token_a: address, token_b: address) -> address:
         token0: address = token_a if token_a < token_b else token_b
         token1: address = token_a if token_a > token_b else token_b
         salt: u256 = keccak256(

@@ -1,5 +1,5 @@
 contract Foo:
     baz: map<u256, u256>
-    def assign(val: u256) -> u256:
+    fn assign(val: u256) -> u256:
         self.assign(000)
         return self.baz[0]

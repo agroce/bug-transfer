@@ -1,4 +1,4 @@
 contract o:
- pub def g(baz:u256):
+ pub fn g(baz:u256):
   assert baz>5,"
 "

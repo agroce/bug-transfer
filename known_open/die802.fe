@@ -1,5 +1,5 @@
 contract Foo:
-    pub def bad(a: u256, b: u256):       pass
+    pub fn bad(a: u256, b: u256):       pass
 contract FooProxy:
-   pub  def baz():
+   pub  fn baz():
         Foo(address(0)).bar(42)

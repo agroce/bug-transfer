@@ -1,4 +1,4 @@
 contract Ownable:
   _owner: address
-  pub def renounceOwnership():
+  pub fn renounceOwnership():
     self._owner < address([ ])

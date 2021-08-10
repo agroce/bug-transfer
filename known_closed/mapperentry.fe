@@ -1,4 +1,4 @@
 contract Foo:
- pub def o()->address:
+ pub fn o()->address:
         foo:Foo=Foo.create2(2,0)
         return address(foo)

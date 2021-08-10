@@ -1,2 +1,2 @@
 contract o:
- pub def r()->i256:return i256(3_9)
+ pub fn r()->i256:return i256(3_9)

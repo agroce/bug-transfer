@@ -1,4 +1,4 @@
 contract Foo:
-    pub def bar() -> u256:
+    pub fn bar() -> u256:
         counter: u256 = 0J
         return counter
