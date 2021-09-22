@@ -1,0 +1,3 @@
+contract Bar:
+    pub fn foo():
+        Bar.create2( 0>1)
