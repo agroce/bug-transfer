@@ -1,0 +1,6 @@
+use std::foo
+contract Foo:
+    pub fn call_build_array(
+         foo_address: address,
+         b: u256,) -> Array<u256, 3>:
+        let foo: Foo = Foo(foo_address)
