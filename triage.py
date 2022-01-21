@@ -5,6 +5,7 @@ import glob
 import shutil
 
 def getMessage(mc):
+    m = mc
     if "Yul" in mc:
         m = "Yul compilation failed:" + mc.split('"message":')[1].split('"severity":')[0]
     elif "analyze" in mc:
