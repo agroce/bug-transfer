@@ -1,0 +1,6 @@
+[1 of 1] Compiling Main             ( test.hs, test.o )
+
+test.hs:18:19: error: parse error on input ‘;’
+   |
+18 |           continue;
+   |                   ^

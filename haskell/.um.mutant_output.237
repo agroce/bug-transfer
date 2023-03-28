@@ -1,0 +1,5 @@
+
+Qsort.hs:8:19: error: parse error on input ‘;’
+  |
+8 |           continue;
+  |                   ^

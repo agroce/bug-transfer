@@ -1,0 +1,6 @@
+[1 of 2] Compiling Qsort            ( Qsort.hs, Qsort.o )
+
+Qsort.hs:7:52: error: parse error on input ‘;’
+  |
+7 |           r = filter ( >= x) xs\n          continue;\n
+  |                                                    ^
